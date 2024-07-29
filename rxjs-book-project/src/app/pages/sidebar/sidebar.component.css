@@ -1,0 +1,11 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.inputs-cont {
+  margin-bottom: 1rem;
+}
+button:first-child {
+  margin-bottom: 1rem;
+}

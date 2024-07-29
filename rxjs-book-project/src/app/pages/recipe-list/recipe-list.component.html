@@ -1,0 +1,7 @@
+<div class="container">
+  <ng-container>
+    @for(recipe of recipes; track recipe){
+    <app-recipe [recipe]="recipe"></app-recipe>
+    }
+  </ng-container>
+</div>
