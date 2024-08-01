@@ -1,0 +1,33 @@
+<ng-container *ngIf="valueChanges$ | async"></ng-container>
+<h2>New Recipe</h2>
+<form [formGroup]="recipeForm">
+  <div>
+    <label>Title</label>
+    <input type="text" formControlName="title" />
+  </div>
+  <div>
+    <label>Ingredients</label>
+    <input type="text" formControlName="ingredients" />
+  </div>
+  <div>
+    <label>Tags</label>
+    <input type="text" *ngFor="let tag of tags" value="tag" />
+  </div>
+  <div>
+    <label>ImageUrl</label>
+    <input type="text" formControlName="imageUrl" />
+  </div>
+  <div>
+    <label>CookingTime</label>
+    <input type="text" formControlName="cookingTime" />
+  </div>
+  <div>
+    <label>Yield</label>
+    <input type="text" formControlName="yield" />
+  </div>
+  <div>
+    <label>Preparation Time</label>
+    <input type="text" formControlName="prepTime" />
+  </div>
+  <input type="text" formControlName="title" />
+</form>

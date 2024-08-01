@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { combineLatest, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { Recipe } from './models/recipe.model';
 import { RecipeService } from './services/recipe.service';
 
@@ -9,27 +9,29 @@ import { RecipeService } from './services/recipe.service';
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.css',
 })
-export class RecipeListComponent implements OnInit, OnDestroy {
-  recipes: Recipe[] = [];
-  filtredRecipes: Recipe[] = [];
-  destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(public http: HttpClient, private service: RecipeService) {}
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
-  ngOnInit(): void {
-    this.service.recipes$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((recipes: any) => {
-        this.recipes = recipes;
-        this.filtredRecipes = recipes;
-        console.log('recipes are:', recipes.slice);
+export class RecipeListComponent {
+  recipes$ = this.service.recipes$;
+  filterRecipesAction$ = this.service.filterRecipesAction$;
+  filtredRecipes$ = combineLatest([
+    this.recipes$,
+    this.filterRecipesAction$,
+  ]).pipe(
+    map(([recipes, filter]: [Recipe[], Recipe]) => {
+      return recipes.filter((recipe) => {
+        console.log(
+          recipe.title?.toLowerCase(),
+          '***********',
+          recipe.title
+            ?.toLowerCase()
+            .indexOf(filter?.title?.toLowerCase() ?? '') != -1
+        );
+        return (
+          recipe.title
+            ?.toLowerCase()
+            .indexOf(filter?.title?.toLowerCase() ?? '') != -1
+        );
       });
-  }
-  // filterResults() {
-  //   this.filterResults = this.recipes.filter(
-  //     (recipe) => recipe.title?.indexOf(this.recipeForm.value.title) != -1
-  //   );
-  // }
+    })
+  );
+  constructor(public http: HttpClient, private service: RecipeService) {}
 }

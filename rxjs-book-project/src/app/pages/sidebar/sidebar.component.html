@@ -1,30 +1,30 @@
 <fieldset>
   <legend>filter</legend>
   <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <button mat-raised-button color="primary">See results</button>
+    <button mat-raised-button color="primary">Clear</button>
     <div class="inputs-cont">
       <div class="input-cont">
-        <label for="">title:</label>
+        <label for="">title:</label><br />
         <input formControlName="title" type="text" />
       </div>
       <div class="input-cont">
-        <label for="">Category:</label>
+        <label for="">Category:</label><br />
         <input formControlName="category" type="text" />
       </div>
       <div class="input-cont">
-        <label for="">Ingredient:</label>
-        <input formControlName="ingredient" type="text" />
+        <label for="">Ingredient:</label><br />
+        <input formControlName="ingredients" type="text" />
       </div>
       <div class="input-cont">
-        <label for="">Tags:</label>
+        <label for="">Tags:</label><br />
         <input formControlName="tags" type="text" />
       </div>
       <div class="input-cont">
-        <label for="">Preparation Time:</label>
-        <input formControlName="preparationTime" type="text" />
+        <label for="">Preparation Time:</label><br />
+        <input formControlName="prepTime" type="text" />
       </div>
       <div class="input-cont">
-        <label for="">Cooking Time:</label>
+        <label for="">Cooking Time:</label><br />
         <input formControlName="cookingTime" type="text" />
       </div>
     </div>

@@ -10,6 +10,8 @@ import { RecipeComponent } from './pages/recipe-list/recipe/recipe.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SidebarModule } from './pages/sidebar/sidebar.module';
+import { RecipeCreationComponent } from './recipe-creation/recipe-creation.component';
+import { RecipeCreationModule } from './recipe-creation/recipe-creation.module';
 
 @NgModule({
   declarations: [AppComponent, RecipeListComponent, RecipeComponent],
@@ -20,6 +22,7 @@ import { SidebarModule } from './pages/sidebar/sidebar.module';
     MatCardModule,
     MatButtonModule,
     SidebarModule,
+    RecipeCreationModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
