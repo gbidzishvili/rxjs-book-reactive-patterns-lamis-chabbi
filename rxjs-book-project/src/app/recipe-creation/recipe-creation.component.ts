@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TAGS } from '../core/models/tags';
-import { catchError, concatMap, of, tap } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  debounceTime,
+  distinctUntilChanged,
+  of,
+  tap,
+} from 'rxjs';
 import { RecipeService } from '../pages/recipe-list/services/recipe.service';
 @Component({
   selector: 'app-recipe-creation',
@@ -25,8 +32,15 @@ export class RecipeCreationComponent {
     steps: [''],
   });
   tags = TAGS;
+
   valueChanges$ = this.recipeForm.valueChanges.pipe(
-    concatMap((formValue) => this.service.saveRecipe(formValue)),
+    debounceTime(1000),
+    distinctUntilChanged(),
+    concatMap((formValue) => {
+      console.log(formValue);
+
+      return this.service.saveRecipe(formValue as { [key: string]: string });
+    }),
     catchError((errors) => of(errors)),
     tap((result) => this.saveSuccess(result))
   );

@@ -11,7 +11,16 @@
   </div>
   <div>
     <label>Tags</label>
-    <input type="text" *ngFor="let tag of tags" value="tag" />
+    <div *ngFor="let tag of tags">
+      <input
+        id="{{ tag.name }}"
+        type="radio"
+        name="tags"
+        [value]="tag.name"
+        formControlName="tags"
+      />
+      <label for="{{ tag.name }}">{{ tag.name }}</label>
+    </div>
   </div>
   <div>
     <label>ImageUrl</label>

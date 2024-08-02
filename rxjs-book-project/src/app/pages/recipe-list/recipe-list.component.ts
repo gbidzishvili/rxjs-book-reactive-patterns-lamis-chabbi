@@ -18,13 +18,6 @@ export class RecipeListComponent {
   ]).pipe(
     map(([recipes, filter]: [Recipe[], Recipe]) => {
       return recipes.filter((recipe) => {
-        console.log(
-          recipe.title?.toLowerCase(),
-          '***********',
-          recipe.title
-            ?.toLowerCase()
-            .indexOf(filter?.title?.toLowerCase() ?? '') != -1
-        );
         return (
           recipe.title
             ?.toLowerCase()

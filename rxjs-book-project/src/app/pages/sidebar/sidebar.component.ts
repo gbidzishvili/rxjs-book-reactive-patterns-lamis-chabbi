@@ -19,9 +19,8 @@ export class SidebarComponent {
   constructor(private service: RecipeService, public fb: FormBuilder) {}
 
   filterResults() {
-    console.log(this.filterForm.value, this.filterForm);
     this.service.updateFilter(
-      this.filterForm?.value as { [key: string]: string }
+      this.filterForm?.value as { [key: string | number]: string }
     );
   }
   onSubmit() {}

@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  Observable,
+  tap,
+} from 'rxjs';
 import { environment } from '../../../../environments/environment';
 const BASE_PATH = environment.basePath;
 @Injectable({
@@ -20,6 +26,6 @@ export class RecipeService {
   }
 
   saveRecipe(formValue: Recipe): Observable<Recipe> {
-    return this.http.post<Recipe>(`${BASE_PATH}/recipes/save`, formValue);
+    return this.http.post<Recipe>(`${BASE_PATH}/formValues`, formValue);
   }
 }
