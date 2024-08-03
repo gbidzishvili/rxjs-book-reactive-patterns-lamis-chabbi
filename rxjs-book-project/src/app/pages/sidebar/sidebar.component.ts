@@ -1,29 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { RecipeService } from '../recipe-list/services/recipe.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent implements OnInit {
-  filterForm!: FormGroup;
-  constructor(public fb: FormBuilder) {}
-  ngOnInit(): void {
-    this.initForm();
-  }
-  initForm() {
-    this.filterForm = this.fb.group({
-      title: [],
-      category: [],
-      ingredient: [],
-      tags: [],
-      preparationTime: [],
-      cookingTime: [],
-    });
-  }
+export class SidebarComponent {
+  filterForm = this.fb.group({
+    title: [''],
+    category: [''],
+    ingredients: [''],
+    tags: [''],
+    prepTime: [''],
+    cookingTime: [''],
+  });
+  constructor(private service: RecipeService, public fb: FormBuilder) {}
+
   filterResults() {
-    console.log(this.filterForm.value);
+    this.service.updateFilter(
+      this.filterForm?.value as { [key: string | number]: string }
+    );
   }
   onSubmit() {}
 }

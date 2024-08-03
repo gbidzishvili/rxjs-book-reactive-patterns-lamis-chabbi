@@ -1,8 +1,8 @@
 export interface Recipe {
-  title: string;
-  category: string;
-  ingredient: string;
-  tags: string;
-  preparationTime: string;
-  cookingTime: string;
+  title?: string;
+  category?: string;
+  ingredients?: string;
+  tags?: string;
+  prepTime?: string;
+  cookingTime?: string;
 }
